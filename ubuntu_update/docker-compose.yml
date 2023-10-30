@@ -1,0 +1,30 @@
+services:
+  my-ubuntu:
+    build: .
+    networks:
+      - my-test-network
+  my-webserver:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - nginx_vol:/usr/share/nginx/html/
+    networks:
+      - my-test-network
+  mysql-db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=Password12345#*
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_vol:/var/lib/mysql/
+    networks:
+      - my-test-network
+volumes:
+  nginx_vol:
+  mysql_vol:
+networks:
+  my-test-network:
+
+  
